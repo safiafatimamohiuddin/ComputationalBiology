@@ -1,0 +1,53 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+## Install packages (Optional)
+
+```{r}
+install.packages("ggplot2")
+install.packages("reshape2")
+```
+## Load the packages
+
+
+```{r}
+library(ggplot2)
+library(reshape2)
+```
+
+
+## Load the data
+
+
+```{r}
+# Load necessary libraries
+PATH_TO_YOUR_FILE = "C:/Users/becaye.balde/Downloads/Myelin Gene Expression Analysis - Sheet8 (1).csv"
+
+# Read the data
+data <- read.csv(PATH_TO_YOUR_FILE, header = TRUE, check.names = FALSE)
+
+# Replace NA with 0
+data[is.na(data)] <- 0
+
+data
+```
+
+## Plot the data
+
+```{r}
+# Melt the data frame to long format for ggplot
+melted_data <- melt(data, id.vars = "Go Process", variable.name = "Process", value.name = "Involved")
+
+# Filter out rows where Involved is 0 (not involved)
+melted_data <- melted_data[melted_data$Involved == 1, ]
+
+# Plot
+ggplot(melted_data, aes(x = `Go Process`, fill = Process)) +  # Correct the usage of backticks for variable names if needed
+  geom_bar(stat = "count") +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1)) +  # Rotate x labels for readability
+  labs(x = "Go Process", y = "Count of GO Processes", fill = "Process",
+       title = "Gene Involvement in GO Processes")
+```
+
