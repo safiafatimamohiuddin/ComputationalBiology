@@ -2,7 +2,7 @@
 title: "R Notebook"
 output: html_notebook
 ---
-## Code to visualize stacked colum charts for gene enrichment analysis (by Becaye Balde)
+## Code to visualize stacked column charts for gene enrichment analysis (by Becaye Balde)
 
 ## Install packages (Optional)
 
